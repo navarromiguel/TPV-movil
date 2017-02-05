@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Ionic 2 App Base
 =====================
 
@@ -18,3 +19,6 @@ $ ionic start myApp
 ```
 
 More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/docs/v2/getting-started/) page.
+=======
+# TPV-movil
+>>>>>>> 672bd3482629c93e52a4c71cc37c09718c56ccf6
