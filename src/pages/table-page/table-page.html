@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>TablePage</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-list>
+ 
+	    <button class="table" ion-item *ngFor="let table of tables" (click)="chooseTable(table)">
+	      {{table.name}}
+	    </button>
+ 
+  </ion-list>
+</ion-content>
