@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { TablePage } from '../table-page/table-page';
 
-/*
-  Generated class for the ProductsPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-products-page',
   templateUrl: 'products-page.html'
@@ -17,6 +12,10 @@ export class ProductsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductsPagePage');
+  }
+
+  newOrder() {
+  	this.navCtrl.parent.viewCtrl._nav.pop({animate:false});
   }
 
 }
