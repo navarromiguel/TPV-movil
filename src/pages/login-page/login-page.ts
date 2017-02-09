@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, MenuController, LoadingController } from 'ionic-angular';
 import { Auth } from '../../providers/auth';
+import { TPV } from '../../providers/tpv';
 import { TablePage } from '../table-page/table-page';
  
 @Component({
@@ -13,11 +14,13 @@ export class LoginPage {
     password: string;
     loading: any;
  
-    constructor(public navCtrl: NavController, public authService: Auth, public loadingCtrl: LoadingController) {
+    constructor(public navCtrl: NavController, public tpv: TPV, public authService: Auth, public loadingCtrl: LoadingController, private menu: MenuController) {
  
     }
  
     ionViewDidLoad() {
+        this.menu.enable(false, "menuOrders");
+        this.menu.enable(false, "menuCategories");
  
         this.showLoader();
  
@@ -32,6 +35,10 @@ export class LoginPage {
         });
  
     }
+
+    ionViewWillLeave() {
+        this.menu.enable(true, "menuOrders");
+    }
  
     login(){
  
@@ -43,10 +50,20 @@ export class LoginPage {
         };
  
         this.authService.login(credentials).then((result) => {
+            
+
+
+
             this.loading.dismiss();
             console.log(result);
             this.navCtrl.setRoot(TablePage);
         }, (err) => {
+        this.tpv.getProductCategories().then((result) => {
+                console.log("data");
+                console.log(result);
+            }, (err) => {
+                console.log("errooor");
+            });
             this.loading.dismiss();
             console.log(err);
             // quitar esto cuando este bien la Autentication

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { App, NavController, NavParams, ViewController } from 'ionic-angular';
+import { App, NavController, NavParams, ViewController, MenuController } from 'ionic-angular';
 import { TablePage } from '../table-page/table-page';
 
 @Component({
@@ -11,7 +11,7 @@ export class OrderPage {
 	table : string;
 	floor : string;
 
-  constructor(public app: App, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public app: App, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private menu: MenuController) {
   	this.table = navParams.get('table');
   	this.floor = navParams.get('floor');
   }

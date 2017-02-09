@@ -11,6 +11,7 @@ import { OrderPage } from '../pages/order-page/order-page'
 import { SignupPage } from '../pages/signup-page/signup-page';
 import { Auth } from '../providers/auth';
 import { Data } from '../providers/data';
+import { TPV } from '../providers/tpv';
  
 @NgModule({
   declarations: [
@@ -49,6 +50,6 @@ tabsPlacement: 'top',
     ProductsPage,
     OrderPage,
   ],
-  providers: [Storage, Data, Auth]
+  providers: [Storage, Data, TPV, Auth]
 })
 export class AppModule {}

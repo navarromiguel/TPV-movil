@@ -1,4 +1,4 @@
-<ion-menu [content]="content">
+<ion-menu id="menuOrders" [content]="content">
   <ion-header>
     <ion-toolbar>
       <ion-title>Comandas</ion-title>
@@ -14,4 +14,21 @@
   </ion-content>
 </ion-menu>
 
+<ion-menu id="menuCategories" side="right" [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Categorías</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button ion-item>
+        Elemento 1
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
 <ion-nav #content [root]="rootPage"></ion-nav>
+
