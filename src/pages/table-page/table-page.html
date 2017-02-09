@@ -1,6 +1,10 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
+  	<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
     <ion-title>Mesas</ion-title>
   </ion-navbar>
 
@@ -8,6 +12,12 @@
 
 
 <ion-content padding>
+	<ion-item>
+	  <ion-label>Planta</ion-label>
+	  <ion-select [(ngModel)]="floor" (ionChange)="onChange()">
+	    <ion-option value="{{f.id}}" *ngFor="let f of floors">{{f.name}}</ion-option>
+	  </ion-select>
+	</ion-item>
 	<ion-list>
  
 	    <button class="table" ion-item *ngFor="let table of tables" (click)="chooseTable(table)">

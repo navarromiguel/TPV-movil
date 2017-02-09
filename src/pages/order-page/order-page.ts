@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { App, NavController, NavParams, ViewController } from 'ionic-angular';
 import { TablePage } from '../table-page/table-page';
 
 @Component({
@@ -7,15 +7,24 @@ import { TablePage } from '../table-page/table-page';
   templateUrl: 'order-page.html'
 })
 export class OrderPage {
+	
+	table : string;
+	floor : string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public app: App, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  	this.table = navParams.get('table');
+  	this.floor = navParams.get('floor');
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrderPagePage');
   }
 
   newOrder() {
-  	this.navCtrl.parent.viewCtrl._nav.pop({animate:false});
+      this.app.getRootNav().setRoot(TablePage)
+        .then(() => {
+          const index = this.viewCtrl.index;
+          this.navCtrl.remove(index);
+        });  
   }
-
 }

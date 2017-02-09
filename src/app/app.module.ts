@@ -10,6 +10,7 @@ import { ProductsPage } from '../pages/products-page/products-page'
 import { OrderPage } from '../pages/order-page/order-page'
 import { SignupPage } from '../pages/signup-page/signup-page';
 import { Auth } from '../providers/auth';
+import { Data } from '../providers/data';
  
 @NgModule({
   declarations: [
@@ -48,6 +49,6 @@ tabsPlacement: 'top',
     ProductsPage,
     OrderPage,
   ],
-  providers: [Storage, Auth]
+  providers: [Storage, Data, Auth]
 })
 export class AppModule {}

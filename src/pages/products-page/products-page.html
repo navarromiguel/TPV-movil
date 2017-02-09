@@ -1,7 +1,10 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Productos</ion-title>
+  	<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{floor}} - {{table}}</ion-title>
     <ion-buttons end>
         <button ion-button icon-only (click)="newOrder()">
         	<ion-icon name="add-circle"></ion-icon>
