@@ -7,7 +7,7 @@
     <ion-title>{{floor}} - {{table}}</ion-title>
     <ion-buttons end>
         <button ion-button icon-only (click)="newOrder()">
-        	<ion-icon name="add-circle"></ion-icon>
+        	<ion-icon name="restaurant"></ion-icon>
         </button>
     </ion-buttons>
   </ion-navbar>
@@ -16,5 +16,23 @@
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item-sliding *ngFor="let l of tpv.currentOrder.lines">
+      <ion-item>
+        <button ion-button (click)="lessQty(l)">
+            <ion-icon name="remove"></ion-icon>
+        </button>
+        <button ion-button (click)="moreQty(l)">
+            <ion-icon name="add"></ion-icon>
+        </button>
+        <span item-right>{{l.qty}}x {{l.product.name}}</span>
+      </ion-item>
+      <ion-item-options>
+        <button danger (click)="removeLine(l)"><ion-icon name="trash"></ion-icon> Eliminar</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
+<ion-footer>
+    <button ion-button *ngIf="tpv.currentOrder.lines.length > 0" (click)="payment()" full>Pagar</button>
+</ion-footer>

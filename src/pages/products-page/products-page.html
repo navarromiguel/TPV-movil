@@ -10,7 +10,7 @@
     <ion-title>{{floor}} - {{table}}</ion-title>
     <ion-buttons end>
         <button ion-button icon-only (click)="newOrder()">
-        	<ion-icon name="add-circle"></ion-icon>
+        	<ion-icon name="restaurant"></ion-icon>
         </button>
     </ion-buttons>
   </ion-navbar>
@@ -19,5 +19,13 @@
 
 
 <ion-content padding>
-
+  <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
+  <ion-card class="cardd" (click)="clickProduct(p)" *ngFor="let p of tpv.products">
+    <img class="img-card" src="img/{{p.image}}"/>
+    <ion-card-content>
+      <ion-card-title>
+        {{p.name}}
+      </ion-card-title>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

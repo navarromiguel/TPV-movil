@@ -13,6 +13,11 @@ export class LoginPage {
     email: string;
     password: string;
     loading: any;
+
+    loadedCategories = false;
+    loadedFloors = false;
+    loadedTables = false;
+    loadedProducts = false;
  
     constructor(public navCtrl: NavController, public tpv: TPV, public authService: Auth, public loadingCtrl: LoadingController, private menu: MenuController) {
  
@@ -58,18 +63,53 @@ export class LoginPage {
             console.log(result);
             this.navCtrl.setRoot(TablePage);
         }, (err) => {
-        this.tpv.getProductCategories().then((result) => {
+        this.tpv.loadCategories().then((result) => {
                 console.log("data");
                 console.log(result);
+                this.loadedCategories = true;
+                this.checkLoadedData();
             }, (err) => {
                 console.log("errooor");
             });
-            this.loading.dismiss();
+
+            this.tpv.loadFloors().then((result) => {
+                console.log("data");
+                console.log(result);
+                this.loadedFloors = true;
+                this.checkLoadedData();
+            }, (err) => {
+                console.log("errooor");
+            });
+
+            this.tpv.loadTables().then((result) => {
+                console.log("data");
+                console.log(result);
+                this.loadedTables = true;
+                this.checkLoadedData();
+            }, (err) => {
+                console.log("errooor");
+            });
+
+            this.tpv.loadProducts().then((result) => {
+                console.log("data");
+                console.log(result);
+                this.loadedProducts = true;
+                this.checkLoadedData();
+            }, (err) => {
+                console.log("errooor");
+            });
+
+            
             console.log(err);
-            // quitar esto cuando este bien la Autentication
-            this.navCtrl.setRoot(TablePage);
         });
  
+    }
+
+    checkLoadedData() {
+        if(this.loadedCategories && this.loadedFloors && this.loadedTables && this.loadedProducts){
+            this.loading.dismiss();
+            this.navCtrl.setRoot(TablePage);
+        }
     }
  
     showLoader(){

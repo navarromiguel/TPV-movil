@@ -7,9 +7,10 @@
 
   <ion-content>
     <ion-list>
-      <button ion-item *ngFor="let o of orders" (click)="openOrder(o)">
-        {{o.floor}} - {{o.table}}
-      </button>
+      <ion-item *ngFor="let o of tpv.orders">
+        <ion-label (click)="openOrder(o)">{{o.floor}} - {{o.table}}</ion-label>
+        <button class="btn-remove-order" icon-only item-right (click)="removeOrder(o)"><ion-icon name="trash"></ion-icon></button>
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>
@@ -23,8 +24,8 @@
 
   <ion-content>
     <ion-list>
-      <button ion-item>
-        Elemento 1
+      <button ion-item *ngFor="let c of tpv.categories" (click)="chooseCategory(c)">
+        {{c.name}}
       </button>
     </ion-list>
   </ion-content>

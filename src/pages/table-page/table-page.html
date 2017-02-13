@@ -15,12 +15,12 @@
 	<ion-item>
 	  <ion-label>Planta</ion-label>
 	  <ion-select [(ngModel)]="floor" (ionChange)="onChange()">
-	    <ion-option value="{{f.id}}" *ngFor="let f of floors">{{f.name}}</ion-option>
+	    <ion-option value="{{f.id}}" *ngFor="let f of tpv.floors">{{f.name}}</ion-option>
 	  </ion-select>
 	</ion-item>
 	<ion-list>
  
-	    <button class="table" ion-item *ngFor="let table of tables" (click)="chooseTable(table)">
+	    <button detail-none class="table" ion-item *ngFor="let table of tables" (click)="chooseTable(table)">
 	      {{table.name}}
 	    </button>
  
