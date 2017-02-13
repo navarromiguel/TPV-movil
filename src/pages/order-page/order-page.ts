@@ -13,8 +13,8 @@ export class OrderPage {
 	floor : string;
 
   constructor(public tpv: TPV, public app: App, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private menu: MenuController) {
-  	this.table = navParams.get('table');
-  	this.floor = navParams.get('floor');
+  	this.table = navParams.get('table').name;
+  	this.floor = navParams.get('floor').name;
   }
 
   ionViewDidLoad() {
@@ -30,19 +30,15 @@ export class OrderPage {
   }
 
   moreQty(l) {
-    let index = this.tpv.currentOrder.lines.indexOf(l);
-    let line = this.tpv.currentOrder.lines[index];
-    line.qty++;
+    this.tpv.setQty(l, 1);
   }
 
   lessQty(l) {
-    let index = this.tpv.currentOrder.lines.indexOf(l);
-    let line = this.tpv.currentOrder.lines[index];
-    if(line.qty > 1) {
-      line.qty--;
+    if(l.qty > 1) {
+      this.tpv.setQty(l, -1);
     }
     else {
-      this.tpv.currentOrder.lines.splice(index, 1);
+      this.tpv.deleteOrderLine(l);
     }
   }
 
@@ -52,9 +48,15 @@ export class OrderPage {
   }
 
   payment() {
-    let index = this.tpv.orders.indexOf(this.tpv.currentOrder);
-    this.tpv.currentOrder = {};
-    this.tpv.orders.splice(index, 1);
-    this.app.getRootNav().setRoot(TablePage);
+    this.tpv.pay().then((res) => {
+      console.log("Pago con existo");
+      console.log(res);
+      this.app.getRootNav().setRoot(TablePage);
+    }, (err) => {
+      console.log("Error al pagar");
+      console.log(err);
+    })
+    
+    
   }
 }

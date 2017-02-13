@@ -96,7 +96,7 @@ export class MyApp {
             console.log('Ok clicked');
             let index = this.tpv.orders.indexOf(order);
             if(index > -1){
-              this.tpv.orders.splice(index, 1);
+              this.tpv.deleteOrder(order);
               if(order === this.tpv.currentOrder) {
                 this.tpv.currentOrder = {};
                 this.app.getRootNav().setRoot(TablePage);

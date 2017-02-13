@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, MenuController, NavParams } from 'ionic-angular';
 import { ProductsPage } from '../products-page/products-page'
 import { OrderPage } from '../order-page/order-page'
 import { TPV } from '../../providers/tpv';
@@ -13,7 +13,7 @@ export class TabsPage {
   tab_order = OrderPage;
   rootParams = {};
 
-  constructor(public tpv: TPV, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private menu: MenuController, public tpv: TPV, public navCtrl: NavController, public navParams: NavParams) {
   	this.rootParams = navParams;
   }
 
@@ -24,6 +24,10 @@ export class TabsPage {
     let table = this.navParams.get('table');
     this.tpv.newOrder(table, floor);
     console.log(table + " - " + floor);
+  }
+
+  enableCategoriesMenu() {
+    this.menu.enable(true, "menuCategories");
   }
 
 }

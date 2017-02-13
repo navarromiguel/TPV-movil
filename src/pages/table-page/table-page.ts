@@ -30,9 +30,9 @@ export class TablePage {
 
   chooseTable(table) {
   	this.navCtrl.push(TabsPage, {
-      table: table.name,
+      table: table,
       floor: this.tpv.floors.filter(
-        floor => floor.id == this.floor)[0].name
+        floor => floor.id == this.floor)[0]
     });
   }
 

@@ -14,8 +14,8 @@ export class ProductsPage {
   products = []
 
   constructor(public toastCtrl: ToastController, public tpv: TPV, public app: App, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private menu: MenuController) {
-  	this.table = navParams.get('table');
-  	this.floor = navParams.get('floor');
+  	this.table = navParams.get('table').name;
+  	this.floor = navParams.get('floor').name;
     this.tpv.filteredProducts = this.tpv.products;
   }
   
