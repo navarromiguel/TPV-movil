@@ -10,6 +10,7 @@ export class TPV {
   status = false;
   categories = [];
   products = [];
+  filteredProducts = [];
   currentOrder: any;
   floors = [];
   tables = [];

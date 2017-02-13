@@ -16,7 +16,7 @@ export class ProductsPage {
   constructor(public toastCtrl: ToastController, public tpv: TPV, public app: App, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private menu: MenuController) {
   	this.table = navParams.get('table');
   	this.floor = navParams.get('floor');
-    this.products = this.tpv.products;
+    this.tpv.filteredProducts = this.tpv.products;
   }
   
   ionViewDidLoad() {
@@ -57,7 +57,7 @@ export class ProductsPage {
       let val = ev.target.value;
 
       if (val && val.trim() != '') {
-        this.products = this.tpv.products.filter((product) => {
+        this.tpv.filteredProducts = this.tpv.products.filter((product) => {
           return (product.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
         })
       }

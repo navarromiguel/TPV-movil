@@ -54,7 +54,28 @@ export class MyApp {
   chooseCategory(category) {
     console.log("categoy selected");
     console.log(category);
+    this.tpv.filteredProducts = this.tpv.products.filter((product) => {
+      return product.category_id == category.id || this.getParents(product.category_id).indexOf(category.id) > -1;
+    });
     this.menu.toggle("menuCategories");
+  }
+
+  getParents(id) {
+    let parents = [];
+    let category = this.tpv.categories.filter((cat) => {
+        return cat.id == id;
+      })[0];
+    while(category.parent_id != 0){
+      console.log("category")
+      console.log(category)
+      parents.push(category.parent_id);
+      category = this.tpv.categories.filter((cat) => {
+        return cat.id == category.parent_id;
+      })[0];
+
+    }
+    console.log(parents);
+    return parents;
   }
 
   removeOrder(order) {
