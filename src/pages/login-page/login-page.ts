@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, MenuController, LoadingController } from 'ionic-angular';
+import { NavController, ToastController, MenuController, LoadingController } from 'ionic-angular';
 import { Auth } from '../../providers/auth';
 import { TPV } from '../../providers/tpv';
 import { TablePage } from '../table-page/table-page';
@@ -19,7 +19,7 @@ export class LoginPage {
     loadedTables = false;
     loadedProducts = false;
  
-    constructor(public navCtrl: NavController, public tpv: TPV, public authService: Auth, public loadingCtrl: LoadingController, private menu: MenuController) {
+    constructor(public toastCtrl: ToastController, public navCtrl: NavController, public tpv: TPV, public authService: Auth, public loadingCtrl: LoadingController, private menu: MenuController) {
  
     }
  
@@ -46,24 +46,19 @@ export class LoginPage {
     }
  
     login(){
- 
         this.showLoader();
  
         let credentials = {
-            email: this.email,
-            password: this.password
+            alias: this.email ? this.email : "",
+            password: this.password ? this.password : ""
         };
  
         this.authService.login(credentials).then((result) => {
-            
-
-
-
+            console.log("LOGEADO CON ÉXITO");
             this.loading.dismiss();
             console.log(result);
-            this.navCtrl.setRoot(TablePage);
-        }, (err) => {
-        this.tpv.loadCategories().then((result) => {
+
+            this.tpv.loadCategories().then((result) => {
                 console.log("data");
                 console.log(result);
                 this.loadedCategories = true;
@@ -99,7 +94,10 @@ export class LoginPage {
                 console.log("errooor");
             });
 
-            
+
+        }, (err) => {
+            this.loading.dismiss();
+            this.loginError();
             console.log(err);
         });
  
@@ -107,9 +105,17 @@ export class LoginPage {
 
     checkLoadedData() {
         if(this.loadedCategories && this.loadedFloors && this.loadedTables && this.loadedProducts){
-            this.loading.dismiss();
             this.navCtrl.setRoot(TablePage);
         }
+    }
+
+    loginError() {
+      let toast = this.toastCtrl.create({
+        message: 'Usuario o contraseña inválidos',
+        duration: 2000,
+        position: 'bottom',
+      });
+      toast.present();
     }
  
     showLoader(){
