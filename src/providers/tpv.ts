@@ -87,38 +87,57 @@ export class TPV {
         });
     });
   }
+
+  loadNewOrders(){
+    return new Promise((resolve, reject) => {
+ 
+      let headers = new Headers();
+ 
+      this.http.get(SERVER_URL + '/orders/news/', {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
  
   deleteOrder(order) {
-    let index = this.orders.indexOf(order);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    this.http.delete(SERVER_URL + '/orders/' + order.id + '/', options)
-    .map(res => res.json())
-    .subscribe(data => {
-          console.log("Borrado order");
-          this.orders.splice(index, 1);
-        //  this.loading.dismiss();
-    }, (err) => {
-          console.log("error");
-          console.log(err);
-    });
+    order.state = "removed";
+
+    this.updateOrder(order).then((res) => {
+        console.log("order updated");
+        
+      }, (err) => {
+        console.log("error updating order");
+      });
   }
 
   deleteOrderLine(line) {
+    console.log("into deleting line...");
+    console.log(line);
+
     let index = this.currentOrder.lines.indexOf(line);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    this.http.delete(SERVER_URL + '/orderlines/' + line.id + '/', options)
-    .map(res => res.json())
-    .subscribe(data => {
-          console.log("Borrado orderline");
-          this.currentOrder.lines.splice(index, 1);
-        //  this.loading.dismiss();
-    }, (err) => {
-          console.log("error");
-          console.log(err);
+    return new Promise((resolve, reject) => {
+      this.http.delete(SERVER_URL + '/orderlines/' + line.id + '/', options)
+      .map(res => res.json())
+      .subscribe(data => {
+            console.log("Borrado orderline");
+            this.currentOrder.lines.splice(index, 1);
+            resolve(data);
+          //  this.loading.dismiss();
+      }, (err) => {
+            console.log("error");
+            console.log(err);
+            reject(err);
+      });
     });
   }
 
@@ -170,19 +189,31 @@ export class TPV {
   setQty(line, n) {
     let index = this.currentOrder.lines.indexOf(line);
     this.currentOrder.lines[index].qty = this.currentOrder.lines[index].qty + n;
+    this.updateLine(line);
+  }
+
+  updateLine(line) {
+    console.log("into update func");
+    console.log(line);
+
+   // let index = this.currentOrder.lines.indexOf(line);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    this.http.put(SERVER_URL + '/orderlines/' + line.id + '/', line, options)
-    .map(res => res.json())
-    .subscribe(data => {
-          console.log("Update hecho");
-          console.log(data);
-        //  this.loading.dismiss();
-    }, (err) => {
-          console.log("error");
-          console.log(err);
-    });
+    return new Promise((resolve, reject) => {
+      this.http.put(SERVER_URL + '/orderlines/' + line.id + '/', line, options)
+        .map(res => res.json())
+        .subscribe(data => {
+              console.log("Update hecho");
+              console.log(data);
+              resolve(data);
+            //  this.loading.dismiss();
+        }, (err) => {
+              console.log("error");
+              console.log(err);
+              reject(err);
+        });
+      });
   }
 
   newOrder(table, floor) {
@@ -237,30 +268,44 @@ export class TPV {
     return new Promise((resolve, reject) => {
       this.createAccountStatement(this.currentOrder).then((as: any) => {
         this.currentOrder.account_statement_id = as.id;
-        
    
-        let headers = new Headers();
-        let options = new RequestOptions({ headers: headers });
-
-        this.http.put(SERVER_URL + '/orders/' + this.currentOrder.id + '/', this.currentOrder, options)
-        .map(res => res.json())
-        .subscribe(data => {
-              console.log("Update hecho");
-              console.log(data);
-            //  this.loading.dismiss();
-              this.currentOrder = {};
-              this.orders.splice(index, 1);
-              resolve(data);
+        this.updateOrder(this.currentOrder).then((res) => {
+          this.currentOrder = {};
+          this.orders.splice(index, 1);
+          resolve(res);
         }, (err) => {
-              console.log("error updating order");
-              console.log(err);
-              reject(err);
+          console.log("error updating order");
+          reject(err);
         });
       
     }, (err) => {
       console.log("error creating as");
       console.log(err);
     });
+    });
+  }
+  
+
+  updateOrder(order) {
+    console.log("to update orderr");
+    console.log(order.id);
+
+    let headers = new Headers();
+    let options = new RequestOptions({ headers: headers });
+
+    return new Promise((resolve, reject) => {
+        this.http.put(SERVER_URL + '/orders/' + order.id + '/', order, options)
+        .map(res => res.json())
+        .subscribe(data => {
+              console.log("Update hecho");
+              console.log(data);
+            //  this.loading.dismiss();
+              resolve(data);
+        }, (err) => {
+              console.log("error updating order");
+              console.log(err);
+              reject(err);
+        });
     });
   }
 

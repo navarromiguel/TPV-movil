@@ -94,6 +94,39 @@ export class LoginPage {
                 console.log("errooor");
             });
 
+            this.tpv.loadNewOrders().then((orders: any) => {
+                    console.log("new orders succesfull loaded");
+                    console.log(orders);
+                    this.tpv.orders = orders;
+
+                    setInterval(()=>{
+                        this.tpv.loadNewOrders().then((orders: any) => {
+                            console.log("new orders succesfull loaded");
+                            console.log(orders);
+                            let id = -1;
+                            if(this.tpv.currentOrder){
+                                id = this.tpv.currentOrder.id;
+                                this.tpv.currentOrder = orders.filter((o) => {
+                                    return o.id == id;
+                                })[0];
+                            }
+
+                            this.tpv.orders = orders;
+                        }, (err) => {
+                            console.log("error loading new orders");
+                            console.log(err);
+                        });
+
+                    },
+                    5000);
+
+
+                }, (err) => {
+                    console.log("error loading new orders");
+                    console.log(err);
+                });
+            
+
 
         }, (err) => {
             this.loading.dismiss();

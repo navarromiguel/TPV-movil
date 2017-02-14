@@ -38,13 +38,19 @@ export class OrderPage {
       this.tpv.setQty(l, -1);
     }
     else {
-      this.tpv.deleteOrderLine(l);
+      this.removeLine(l);
     }
   }
 
   removeLine(l) {
     let index = this.tpv.currentOrder.lines.indexOf(l);
     this.tpv.currentOrder.lines.splice(index, 1);
+    this.tpv.deleteOrderLine(l).then((res) => {
+      console.log("success delete line");
+    }, (err) => {
+      console.log("error on delete line");
+    });
+    
   }
 
   payment() {

@@ -42,7 +42,7 @@ export class MyApp {
 
   openOrder(order) {
   	this.menu.close();
-    if(this.tpv.currentOrder !== order) {
+    if(this.tpv.currentOrder != order) {
       this.tpv.currentOrder = order;
     	this.nav.push(TabsPage, {
     	  table: order.table, 
@@ -93,11 +93,31 @@ export class MyApp {
         {
           text: 'Confirmar',
           handler: () => {
+            console.log(order);
+            console.log(this.tpv.orders);
             console.log('Ok clicked');
-            let index = this.tpv.orders.indexOf(order);
-            if(index > -1){
+    //        let index = this.tpv.orders.indexOf(order);
+
+
+            let index = -1;
+            for(let i=0; i<this.tpv.orders.length && index == -1; i++){
+              if(this.tpv.orders[i].id == order.id){
+                index = i;
+              }
+            }
+
+            let found = this.tpv.orders.filter((item) => {
+              return item.id == order.id;
+            })[0];
+
+            console.log(index);
+            console.log("found:");
+            console.log(found);
+            if(index > -1) {
               this.tpv.deleteOrder(order);
-              if(order === this.tpv.currentOrder) {
+              this.tpv.orders.splice(index, 1);
+
+              if(this.tpv.currentOrder && order.id == this.tpv.currentOrder.id) {
                 this.tpv.currentOrder = {};
                 this.app.getRootNav().setRoot(TablePage);
               }

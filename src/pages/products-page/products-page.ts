@@ -17,6 +17,8 @@ export class ProductsPage {
   	this.table = navParams.get('table').name;
   	this.floor = navParams.get('floor').name;
     this.tpv.filteredProducts = this.tpv.products;
+    console.log("table y floor");
+    console.log(this.table + " " + this.floor);
   }
   
   ionViewDidLoad() {

@@ -8,7 +8,7 @@
   <ion-content>
     <ion-list>
       <ion-item *ngFor="let o of tpv.orders">
-        <ion-label (click)="openOrder(o)">{{o.floor}} - {{o.table}}</ion-label>
+        <ion-label (click)="openOrder(o)">{{o.floor.name}} - {{o.table.name}}</ion-label>
         <button class="btn-remove-order" icon-only item-right (click)="removeOrder(o)"><ion-icon name="trash"></ion-icon></button>
       </ion-item>
     </ion-list>
