@@ -1,1 +1,1 @@
-export let SERVER_URL = "http://localhost:8000";
+export let SERVER_URL = "http://192.168.0.21:8000";

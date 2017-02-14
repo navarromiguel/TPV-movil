@@ -217,8 +217,12 @@ export class TPV {
   }
 
   newOrder(table, floor) {
+    console.log("new order");
+    console.log(table);
+    console.log(floor);
+    console.log(this.orders);
     let res = this.orders.filter((order) => {
-      return order.table == table && order.floor == floor;
+      return order.table.id == table.id && order.floor.id == floor.id;
     });
 
     if(res.length == 0) {
