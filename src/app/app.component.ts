@@ -29,13 +29,11 @@ export class MyApp {
       StatusBar.styleDefault();
 
       this.dataService.getData().then((orders) => {
- 
       this.tpv = tpv;
 
       if(orders){
         this.orders = JSON.parse(orders); 
       }
- 
     });
     });
   }
@@ -44,11 +42,11 @@ export class MyApp {
   	this.menu.close();
     if(this.tpv.currentOrder != order) {
       this.tpv.currentOrder = order;
-    	this.nav.push(TabsPage, {
-    	  table: order.table, 
+    }
+    this.nav.push(TabsPage, {
+        table: order.table, 
         floor: order.floor
       });
-    }
   }
 
   chooseCategory(category) {

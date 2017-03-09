@@ -33,7 +33,7 @@ export class LoginPage {
         this.authService.checkAuthentication().then((res) => {
             console.log("Already authorized");
             this.loading.dismiss();
-            this.navCtrl.setRoot(TablePage);
+         //   this.navCtrl.setRoot(TablePage);
         }, (err) => {
             console.log("Not already authorized");
             this.loading.dismiss();
@@ -55,7 +55,7 @@ export class LoginPage {
  
         this.authService.login(credentials).then((result) => {
             console.log("LOGEADO CON ÉXITO");
-            this.loading.dismiss();
+            
             console.log(result);
 
             this.tpv.loadCategories().then((result) => {
@@ -99,6 +99,8 @@ export class LoginPage {
                     console.log(orders);
                     this.tpv.orders = orders;
 
+                    console.log("start interval...");
+
                     setInterval(()=>{
                         this.tpv.loadNewOrders().then((orders: any) => {
                             console.log("new orders succesfull loaded");
@@ -118,7 +120,7 @@ export class LoginPage {
                         });
 
                     },
-                    5000);
+                    20000);
 
 
                 }, (err) => {
@@ -138,6 +140,8 @@ export class LoginPage {
 
     checkLoadedData() {
         if(this.loadedCategories && this.loadedFloors && this.loadedTables && this.loadedProducts){
+            console.log("loading finished");
+            this.loading.dismiss();
             this.navCtrl.setRoot(TablePage);
         }
     }

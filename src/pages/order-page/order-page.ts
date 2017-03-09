@@ -44,6 +44,7 @@ export class OrderPage {
 
   removeLine(l) {
     let index = this.tpv.currentOrder.lines.indexOf(l);
+    console.log(index);
     this.tpv.currentOrder.lines.splice(index, 1);
     this.tpv.deleteOrderLine(l).then((res) => {
       console.log("success delete line");

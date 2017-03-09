@@ -130,7 +130,6 @@ export class TPV {
       .map(res => res.json())
       .subscribe(data => {
             console.log("Borrado orderline");
-            this.currentOrder.lines.splice(index, 1);
             resolve(data);
           //  this.loading.dismiss();
       }, (err) => {
@@ -146,7 +145,7 @@ export class TPV {
     console.log(this.currentOrder);
 
     let res = this.currentOrder.lines.filter((line) => {
-      return line.product == product;
+      return line.product.id == product.id;
     });
    // this.showLoader();
     if(res.length>0){
@@ -226,7 +225,7 @@ export class TPV {
     });
 
     if(res.length == 0) {
-    //  this.showLoader();
+      this.showLoader();
       let order = {
         id: undefined,
         state: "new",
@@ -251,7 +250,7 @@ export class TPV {
           order.id = data.id;
           this.orders.push(order);
           this.currentOrder = order;
-      //    this.loading.dismiss();
+          this.loading.dismiss();
         }, (err) => {
         console.log("error");
         console.log(err);

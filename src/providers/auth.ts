@@ -44,6 +44,7 @@ export class Auth {
  
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
+        headers.append('Proxy-Authorization', 'Basic');
  
         this.http.post('https://YOUR_HEROKU_APP.herokuapp.com/api/auth/register', JSON.stringify(details), {headers: headers})
           .subscribe(res => {
