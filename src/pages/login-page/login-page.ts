@@ -120,7 +120,7 @@ export class LoginPage {
                         });
 
                     },
-                    20000);
+                    5000);
 
 
                 }, (err) => {

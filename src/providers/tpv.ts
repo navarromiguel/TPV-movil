@@ -225,7 +225,6 @@ export class TPV {
     });
 
     if(res.length == 0) {
-      this.showLoader();
       let order = {
         id: undefined,
         state: "new",
@@ -250,7 +249,6 @@ export class TPV {
           order.id = data.id;
           this.orders.push(order);
           this.currentOrder = order;
-          this.loading.dismiss();
         }, (err) => {
         console.log("error");
         console.log(err);

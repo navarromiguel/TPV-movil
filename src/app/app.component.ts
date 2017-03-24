@@ -60,16 +60,38 @@ export class MyApp {
 
   getParents(id) {
     let parents = [];
-    let category = this.tpv.categories.filter((cat) => {
+    let category;
+
+    /*
+     = this.tpv.categories.filter((cat) => {
         return cat.id == id;
       })[0];
+    */
+
+    for(let i=0; i<this.tpv.categories.length; i++) {
+      if(this.tpv.categories[i].id == id){
+        category = this.tpv.categories[i];
+      }
+    }
+
+    console.log("CATEGORIA ENCONTRADA??");
+    console.log(category);
     while(category.parent_id != 0){
       console.log("category")
       console.log(category)
       parents.push(category.parent_id);
+
+      /*
       category = this.tpv.categories.filter((cat) => {
         return cat.id == category.parent_id;
       })[0];
+      */
+
+      for(let i=0; i<this.tpv.categories.length; i++) {
+        if(this.tpv.categories[i].id == category.parent_id){
+          category = this.tpv.categories[i];
+        }
+      }
 
     }
     console.log(parents);
