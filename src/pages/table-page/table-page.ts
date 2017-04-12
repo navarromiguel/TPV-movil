@@ -17,6 +17,7 @@ export class TablePage {
     this.floor = this.tpv.floors[0].id;
     this.tables = this.tpv.tables.filter(
           table => table.floor_id === this.floor);
+    console.log("tables inicializadas");
   }
 
   ionViewDidLoad() {
