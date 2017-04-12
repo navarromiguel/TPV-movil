@@ -12,7 +12,8 @@ import { SignupPage } from '../pages/signup-page/signup-page';
 import { Auth } from '../providers/auth';
 import { Data } from '../providers/data';
 import { TPV } from '../providers/tpv';
- 
+import { OdooRPCService } from 'angular2-odoo-jsonrpc';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -50,6 +51,6 @@ tabsPlacement: 'top',
     ProductsPage,
     OrderPage,
   ],
-  providers: [Storage, Data, TPV, Auth]
+  providers: [Storage, Data, TPV, Auth, OdooRPCService]
 })
 export class AppModule {}
