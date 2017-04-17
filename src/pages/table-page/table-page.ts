@@ -14,9 +14,16 @@ export class TablePage {
 
 
   constructor(public tpv: TPV, public navCtrl: NavController, public navParams: NavParams) {
+    console.log("Tables page init");
+    console.log(this.tpv.floors);
     this.floor = this.tpv.floors[0].id;
-    this.tables = this.tpv.tables.filter(
-          table => table.floor_id === this.floor);
+    console.log("floor setted");
+
+    for(let i=0; i<this.tpv.tables.length; i++){
+      if(this.tpv.tables[i].floor_id[0] == this.floor){
+        this.tables.push(this.tpv.tables[i])
+      }
+    }
     console.log("tables inicializadas");
   }
 

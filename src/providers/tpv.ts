@@ -3,6 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { SERVER_URL } from './config'
 import { LoadingController } from 'ionic-angular';
+import { OdooRPCService } from 'angular2-odoo-jsonrpc';
 
 @Injectable()
 export class TPV {
@@ -17,23 +18,26 @@ export class TPV {
   tables = [];
   loading: any;
 
-  constructor(public http: Http, public loadingCtrl: LoadingController) {
+  constructor(public http: Http, public loadingCtrl: LoadingController, public odooRPC: OdooRPCService) {
     console.log('Hello TPV Provider');
+
+    this.odooRPC.init({
+            odoo_server: SERVER_URL,
+         //   http_auth: "admin:password" // optional
+        });
   }
 
   loadCategories(){
  
     return new Promise((resolve, reject) => {
  
-      let headers = new Headers();
- 
-      this.http.get(SERVER_URL + '/product_categories/', {headers: headers})
-        .map(res => res.json())
-        .subscribe(data => {
-          this.categories = data;
-          resolve(data);
-        }, (err) => {
-          reject(err);
+      this.odooRPC.searchRead('pos.category', [], ['id','name','parent_id','child_id']).then(res => {
+            console.log('categories cargadas');
+            console.log(res);
+            resolve(res);
+        }).catch( err => {
+            console.error('categoias no loaded', err);
+            reject(err);
         });
     });
  
@@ -43,15 +47,13 @@ export class TPV {
  
     return new Promise((resolve, reject) => {
  
-      let headers = new Headers();
- 
-      this.http.get(SERVER_URL + '/floors/', {headers: headers})
-        .map(res => res.json())
-        .subscribe(data => {
-          this.floors = data;
-          resolve(data);
-        }, (err) => {
-          reject(err);
+      this.odooRPC.searchRead('restaurant.floor', function(self){ return [['pos_config_id','=',self.config.id]]; }, ['id', 'name','background_color','table_ids','sequence']).then(res => {
+            console.log('floors cargados');
+            console.log(res);
+            resolve(res);
+        }).catch( err => {
+            console.error('floors no loaded', err);
+            reject(err);
         });
     });
   }
@@ -59,31 +61,28 @@ export class TPV {
   loadTables(){
     return new Promise((resolve, reject) => {
  
-      let headers = new Headers();
- 
-      this.http.get(SERVER_URL + '/tables/', {headers: headers})
-        .map(res => res.json())
-        .subscribe(data => {
-          this.tables = data;
-          resolve(data);
-        }, (err) => {
-          reject(err);
+      this.odooRPC.searchRead('restaurant.table', [['floor_id','!=',false]], ['id', 'name','width','height','position_h','position_v','shape','floor_id','color','seats']).then(res => {
+            console.log('tables cargados');
+            console.log(res);
+            resolve(res);
+        }).catch( err => {
+            console.error('tables no loaded', err);
+            reject(err);
         });
     });
   }
 
   loadProducts(){
-    return new Promise((resolve, reject) => {
- 
-      let headers = new Headers();
- 
-      this.http.get(SERVER_URL + '/products/', {headers: headers})
-        .map(res => res.json())
-        .subscribe(data => {
-          this.products = data;
-          resolve(data);
-        }, (err) => {
-          reject(err);
+    return new Promise((resolve, reject) => { 
+      this.odooRPC.searchRead('product.product', [['sale_ok','=',true],['available_in_pos','=',true]], ['display_name', 'list_price','price','pos_categ_id', 'taxes_id', 
+                 'description_sale', 'description',
+                 'product_tmpl_id']).then(res => {
+            console.log('productos cargados');
+            console.log(res);
+            resolve(res);
+        }).catch( err => {
+            console.error('products no loaded', err);
+            reject(err);
         });
     });
   }

@@ -59,45 +59,46 @@ export class LoginPage {
             
             console.log(result);
 
-            this.loading.dismiss();
-            this.email ="success";
-
-            this.tpv.loadCategories().then((result) => {
+            this.tpv.loadCategories().then((result: any) => {
                 console.log("data");
                 console.log(result);
+                this.tpv.categories = result.records;
                 this.loadedCategories = true;
                 this.checkLoadedData();
             }, (err) => {
                 console.log("errooor");
             });
 
-            this.tpv.loadFloors().then((result) => {
+            this.tpv.loadFloors().then((result: any) => {
                 console.log("data");
                 console.log(result);
+                this.tpv.floors = result.records;
                 this.loadedFloors = true;
                 this.checkLoadedData();
             }, (err) => {
                 console.log("errooor");
             });
 
-            this.tpv.loadTables().then((result) => {
+            this.tpv.loadTables().then((result: any) => {
                 console.log("data");
                 console.log(result);
+                this.tpv.tables = result.records;
                 this.loadedTables = true;
                 this.checkLoadedData();
             }, (err) => {
                 console.log("errooor");
             });
 
-            this.tpv.loadProducts().then((result) => {
+            this.tpv.loadProducts().then((result: any) => {
                 console.log("data");
                 console.log(result);
+                this.tpv.products = result.records;
                 this.loadedProducts = true;
                 this.checkLoadedData();
             }, (err) => {
                 console.log("errooor");
             });
-
+/*
             this.tpv.loadNewOrders().then((orders: any) => {
                     console.log("new orders succesfull loaded");
                     console.log(orders);
@@ -123,6 +124,7 @@ export class LoginPage {
                             console.log(err);
                         });
 
+
                     },
                     20000);
 
@@ -131,7 +133,7 @@ export class LoginPage {
                     console.log("error loading new orders");
                     console.log(err);
                 });
-            
+    */
 
 
         }, (err) => {
