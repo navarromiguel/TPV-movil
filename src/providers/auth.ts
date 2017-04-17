@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Storage } from '@ionic/storage';
-import { SERVER_URL } from './config'
+import { SERVER_URL, DB_NAME, USER, PASSWORD } from './config'
 import 'rxjs/add/operator/map';
 import { OdooRPCService } from 'angular2-odoo-jsonrpc';
 
@@ -10,10 +10,10 @@ export class Auth {
  
   public token: any;
  
-  constructor(public http: Http, public storage: Storage, odooRPC: OdooRPCService) {
+  constructor(public http: Http, public storage: Storage, public odooRPC: OdooRPCService) {
     this.odooRPC.init({
-            odoo_server: SERVER_URL;
-            http_auth: "admin:password" // optional
+            odoo_server: SERVER_URL,
+         //   http_auth: "admin:password" // optional
         });
   }
  
@@ -67,10 +67,12 @@ export class Auth {
   }
  
   login(credentials){
- 
+    console.log(this.odooRPC);
     return new Promise((resolve, reject) => {
- 
-        this.odooRPC.login('siciliano', 'admin', 'password').then(res => {
+        console.log("creds:");
+        console.log(credentials);
+        console.log(DB_NAME);
+        this.odooRPC.login(DB_NAME, credentials.alias, credentials.password).then(res => {
             console.log('login success');
             console.log(res);
             resolve(res);

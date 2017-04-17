@@ -27,18 +27,19 @@ export class LoginPage {
         this.menu.enable(false, "menuOrders");
         this.menu.enable(false, "menuCategories");
  
-        this.showLoader();
+      //  this.showLoader();
  
         //Check if already authenticated
+        /*
         this.authService.checkAuthentication().then((res) => {
             console.log("Already authorized");
             this.loading.dismiss();
-         //   this.navCtrl.setRoot(TablePage);
-        }, (err) => {
+        */ //   this.navCtrl.setRoot(TablePage);
+      /*  }, (err) => {
             console.log("Not already authorized");
             this.loading.dismiss();
         });
- 
+ */
     }
 
     ionViewWillLeave() {
@@ -57,6 +58,9 @@ export class LoginPage {
             console.log("LOGEADO CON ÉXITO");
             
             console.log(result);
+
+            this.loading.dismiss();
+            this.email ="success";
 
             this.tpv.loadCategories().then((result) => {
                 console.log("data");
@@ -134,6 +138,7 @@ export class LoginPage {
             this.loading.dismiss();
             this.loginError();
             console.log(err);
+            this.email = "ERROR";
         });
  
     }
