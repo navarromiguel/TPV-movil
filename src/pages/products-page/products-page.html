@@ -21,7 +21,7 @@
 <ion-content padding>
   <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
   <ion-card class="cardd" (click)="clickProduct(p)" *ngFor="let p of tpv.filteredProducts">
-    <img class="img-card" src="img/placeholder.png"/>
+    <img class="img-card" src={{p.img}}/>
     <ion-card-content>
       <ion-card-title>
         {{p.name}}

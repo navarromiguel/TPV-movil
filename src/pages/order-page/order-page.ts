@@ -55,7 +55,9 @@ export class OrderPage {
   }
 
   payment() {
-    this.tpv.pay().then((res) => {
+    this.tpv.pay();
+    this.app.getRootNav().setRoot(TablePage);
+    /*.then((res) => {
       console.log("Pago con exito");
       console.log(res);
       this.app.getRootNav().setRoot(TablePage);
@@ -63,6 +65,7 @@ export class OrderPage {
       console.log("Error al pagar");
       console.log(err);
     })
+    */
     
     
   }

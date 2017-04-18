@@ -27,9 +27,10 @@ export class LoginPage {
         this.menu.enable(false, "menuOrders");
         this.menu.enable(false, "menuCategories");
  
-        this.showLoader();
+       // this.showLoader();
  
         //Check if already authenticated
+        /*
         this.authService.checkAuthentication().then((res) => {
             console.log("Already authorized");
             this.loading.dismiss();
@@ -38,6 +39,7 @@ export class LoginPage {
             console.log("Not already authorized");
             this.loading.dismiss();
         });
+        */
  
     }
 
@@ -46,6 +48,7 @@ export class LoginPage {
     }
  
     login(){
+    /*
         this.showLoader();
  
         let credentials = {
@@ -127,7 +130,7 @@ export class LoginPage {
                     console.log("error loading new orders");
                     console.log(err);
                 });
-            
+           
 
 
         }, (err) => {
@@ -135,7 +138,8 @@ export class LoginPage {
             this.loginError();
             console.log(err);
         });
- 
+     */
+     this.navCtrl.setRoot(TablePage);
     }
 
     checkLoadedData() {

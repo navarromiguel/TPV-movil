@@ -9,12 +9,50 @@ export class TPV {
 
   orders=[];
   status = false;
-  categories = [];
-  products = [];
+  categories = [
+    {id: 1, name: 'Todos', parent_id: 0},
+    {id: 2, name: 'Pizzas', parent_id: 1},
+    {id: 3, name: 'Ensaladas', parent_id: 1},
+    {id: 4, name: 'Postres', parent_id: 1},
+    {id: 5, name: 'Pastas', parent_id: 1},
+    {id: 6, name: 'Bebidas', parent_id: 1},
+    {id: 7, name: 'Cervezas', parent_id: 1},
+  ];
+  products = [
+    {id: 1, name: 'Pizza 4 quesos', category_id: 2, img: 'img/pizza4quesos.jpeg'},
+    {id: 2, name: 'Pizza Calzone', category_id: 2, img: 'img/calzone.jpeg'},
+    {id: 3, name: 'Pasta Bolognesa', category_id: 5, img: 'img/bolognesa.jpeg'},
+    {id: 4, name: 'Pasta Carbonara', category_id: 5, img: 'img/carbonara.jpeg'},
+    {id: 5, name: 'Agua', category_id: 6, img: 'img/agua.jpeg'},
+    {id: 6, name: 'Refresco', category_id: 6, img: 'img/refresco.jpeg'},
+    {id: 7, name: 'Mahou', category_id: 7, img: 'img/mahou.jpeg'},
+    {id: 8, name: 'San Miguel', category_id: 7, img: 'img/sanmiguel.jpeg'},
+    {id: 9, name: '4 Estaciones', category_id: 3, img: 'img/ensalada4estaciones.jpeg'},
+    {id: 10, name: 'Cesar', category_id: 3, img: 'img/cesar.jpeg'},
+    {id: 11, name: 'Tarta la abuela', category_id: 4, img: 'img/abuela.jpeg'},
+    {id: 12, name: 'Helado', category_id: 4, img: 'img/helado.jpeg'},
+  ];
   filteredProducts = [];
   currentOrder: any;
-  floors = [];
-  tables = [];
+  floors = [
+    {id: 1, name: 'Terraza'},
+    {id: 2, name: 'Sala'},
+  ];
+  tables = [
+    {id: 1, name: 'Mesa 1', floor_id: 1},
+    {id: 2, name: 'Mesa 2', floor_id: 1},
+    {id: 3, name: 'Mesa 3', floor_id: 1},
+    {id: 4, name: 'Mesa 4', floor_id: 1},
+    {id: 5, name: 'Mesa 5', floor_id: 1},
+    {id: 6, name: 'Mesa 1', floor_id: 2},
+    {id: 7, name: 'Mesa 2', floor_id: 2},
+    {id: 8, name: 'Mesa 3', floor_id: 2},
+    {id: 9, name: 'Mesa 4', floor_id: 2},
+    {id: 10, name: 'Mesa 5', floor_id: 2},
+    {id: 11, name: 'Mesa 6', floor_id: 2},
+    {id: 12, name: 'Mesa 7', floor_id: 2},
+    {id: 13, name: 'Mesa 8', floor_id: 2},
+  ];
   loading: any;
 
   constructor(public http: Http, public loadingCtrl: LoadingController) {
@@ -167,6 +205,7 @@ export class TPV {
 
       console.log(line);
 
+/*
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
 
@@ -176,12 +215,17 @@ export class TPV {
           console.log("insercion hecha");
           console.log(data);
           line.id = data.id;
+  */
+
           this.currentOrder.lines.push(line);
+
         //  this.loading.dismiss();
+        /*
         }, (err) => {
           console.log("error");
           console.log(err);
         });
+    */
     }
   }
 
@@ -225,7 +269,7 @@ export class TPV {
     });
 
     if(res.length == 0) {
-      this.showLoader();
+     // this.showLoader();
       let order = {
         id: undefined,
         state: "new",
@@ -237,8 +281,12 @@ export class TPV {
         lines: []
       };
 
-      console.log(order)
+      console.log(order);
 
+      this.orders.push(order);
+      this.currentOrder = order;
+
+/*
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
 
@@ -255,6 +303,7 @@ export class TPV {
         console.log("error");
         console.log(err);
         });
+  */
     } else {
       this.currentOrder = res[0];
     }
@@ -268,6 +317,10 @@ export class TPV {
     let index = this.orders.indexOf(this.currentOrder);
     this.currentOrder.state = "paid";
 
+    this.currentOrder = {};
+    this.orders.splice(index, 1);
+
+/*
     return new Promise((resolve, reject) => {
       this.createAccountStatement(this.currentOrder).then((as: any) => {
         this.currentOrder.account_statement_id = as.id;
@@ -286,6 +339,7 @@ export class TPV {
       console.log(err);
     });
     });
+  */
   }
   
 
