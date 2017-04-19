@@ -1,9 +1,14 @@
 <ion-header>
 
-  <ion-navbar>
-  	<button ion-button  menuToggle="menuOrders">
+  <ion-navbar hideBackButton="true">
+  	<button ion-button menuToggle="menuOrders">
       <ion-icon name="menu"></ion-icon>
     </button>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="goMenu()">
+        	<ion-icon name="home"></ion-icon>
+        </button>
+    </ion-buttons>
 
     <ion-title>Mesas</ion-title>
   </ion-navbar>

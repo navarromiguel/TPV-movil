@@ -14,15 +14,15 @@
 
 
 <ion-content padding>
-	<ion-list>
-      <ion-item (click)="openComandero()">
-      	Comandero
-      </ion-item>
-      <ion-item (click)="openQR()">
-      	Almacén
-      </ion-item>
-      <ion-item>
-      	Alertas
-      </ion-item>
-	</ion-list>
+      <div class="item" (click)="openComandero()">
+      	<p>Comandero</p>
+      </div>
+      <hr>
+      <div class="item" (click)="openQR()">
+      	<p>Almacén</p>
+      </div>
+      <hr>
+      <div class="item">
+      	<p>Alertas</p>
+      </div>
 </ion-content>

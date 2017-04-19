@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs-page/tabs-page'
+import { CpanelPage } from '../cpanel/cpanel'
 import { TPV } from '../../providers/tpv';
 
 @Component({
@@ -35,6 +36,10 @@ export class TablePage {
       floor: this.tpv.floors.filter(
         floor => floor.id == this.floor)[0]
     });
+  }
+
+  goMenu() {
+    this.navCtrl.setRoot(CpanelPage);
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { TablePage } from '../table-page/table-page';
-
+import { QrdataPage } from '../qrdata/qrdata'
 
 declare var cordova;
 /*
@@ -31,10 +31,7 @@ export class CpanelPage {
 
   	cordova.plugins.barcodeScanner.scan(
       (result) => {
-          alert("We got a barcode\n" +
-                "Result: " + result.text + "\n" +
-                "Format: " + result.format + "\n" +
-                "Cancelled: " + result.cancelled);
+          this.navCtrl.push(QrdataPage);
       }, 
       (error) => {
           alert("Fallo al escanear.");
