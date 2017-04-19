@@ -7,6 +7,7 @@ import { TablePage } from '../pages/table-page/table-page';
 import { TabsPage } from '../pages/tabs-page/tabs-page'
 import { ProductsPage } from '../pages/products-page/products-page'
 import { OrderPage } from '../pages/order-page/order-page'
+import { CpanelPage } from '../pages/cpanel/cpanel'
 import { Data } from '../providers/data';
 import { TPV } from '../providers/tpv';
 

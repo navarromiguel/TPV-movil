@@ -3,7 +3,8 @@ import { NavController, ToastController, MenuController, LoadingController } fro
 import { Auth } from '../../providers/auth';
 import { TPV } from '../../providers/tpv';
 import { TablePage } from '../table-page/table-page';
- 
+import { CpanelPage } from '../cpanel/cpanel'
+
 @Component({
   selector: 'login-page',
   templateUrl: 'login-page.html'
@@ -139,7 +140,7 @@ export class LoginPage {
             console.log(err);
         });
      */
-     this.navCtrl.setRoot(TablePage);
+     this.navCtrl.setRoot(CpanelPage);
     }
 
     checkLoadedData() {
