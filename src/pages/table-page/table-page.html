@@ -5,8 +5,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-buttons end>
-        <button ion-button icon-only (click)="goMenu()">
+        <button ion-button icon-only (click)="goMenu()" *ngIf="user == 'admin'">
         	<ion-icon name="home"></ion-icon>
+        </button>
+        <button ion-button icon-only (click)="logout()" *ngIf="user == 'demo'">
+        	<ion-icon name="log-out"></ion-icon>
         </button>
     </ion-buttons>
 

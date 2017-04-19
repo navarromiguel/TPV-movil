@@ -140,7 +140,23 @@ export class LoginPage {
             console.log(err);
         });
      */
-     this.navCtrl.setRoot(CpanelPage);
+
+     let credentials = {
+            alias: this.email ? this.email : "",
+            password: this.password ? this.password : ""
+        };
+    
+    localStorage.setItem("user", credentials.alias);
+    if(credentials.alias == "admin" && credentials.password=="admin"){
+        this.navCtrl.setRoot(CpanelPage);
+    }
+    else if(credentials.alias == "demo" && credentials.password=="demo"){
+        this.navCtrl.setRoot(TablePage);
+    }
+    else
+        this.loginError();
+
+     
     }
 
     checkLoadedData() {

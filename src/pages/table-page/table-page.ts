@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs-page/tabs-page'
 import { CpanelPage } from '../cpanel/cpanel'
+import { LoginPage } from '../login-page/login-page'
 import { TPV } from '../../providers/tpv';
 
 @Component({
@@ -12,6 +13,8 @@ export class TablePage {
 
   floor: any;
   tables = [];
+
+  user = localStorage.getItem("user");
 
 
   constructor(public tpv: TPV, public navCtrl: NavController, public navParams: NavParams) {
@@ -40,6 +43,10 @@ export class TablePage {
 
   goMenu() {
     this.navCtrl.setRoot(CpanelPage);
+  }
+
+  logout() {
+    this.navCtrl.setRoot(LoginPage);
   }
 
 }
