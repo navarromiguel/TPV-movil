@@ -11,6 +11,8 @@ import { OrderPage } from '../pages/order-page/order-page'
 import { SignupPage } from '../pages/signup-page/signup-page';
 import { CpanelPage } from '../pages/cpanel/cpanel'
 import { QrdataPage } from '../pages/qrdata/qrdata'
+import { AlertsPage } from '../pages/alerts/alerts'
+import { AlertDetailsPage } from '../pages/alert-details/alert-details'
 import { Auth } from '../providers/auth';
 import { Data } from '../providers/data';
 import { TPV } from '../providers/tpv';
@@ -26,6 +28,8 @@ import { TPV } from '../providers/tpv';
     OrderPage,
     CpanelPage,
     QrdataPage,
+    AlertsPage,
+    AlertDetailsPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -55,6 +59,8 @@ tabsPlacement: 'top',
     OrderPage,
     CpanelPage,
     QrdataPage,
+    AlertsPage,
+    AlertDetailsPage
   ],
   providers: [Storage, Data, TPV, Auth]
 })

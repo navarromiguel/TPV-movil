@@ -19,13 +19,14 @@
 
 
 <ion-content>
-      <div class="item border" (click)="openComandero()">
+      <ion-item class="item border" (click)="openComandero()">
       	<p>Comandero</p>
-      </div>
-      <div class="item border" (click)="openQR()">
+      </ion-item>
+      <ion-item class="item border" (click)="openQR()">
       	<p>Almacén</p>
-      </div>
-      <div class="item">
+      </ion-item>
+      <ion-item no-lines class="item" (click)="openAlerts()">
       	<p>Alertas</p>
-      </div>
+      	<ion-badge item-right>2</ion-badge>
+      </ion-item>
 </ion-content>

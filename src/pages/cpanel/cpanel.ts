@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { TablePage } from '../table-page/table-page';
 import { QrdataPage } from '../qrdata/qrdata'
 import { LoginPage } from '../login-page/login-page'
+import { AlertsPage } from '../alerts/alerts'
 
 declare var cordova;
 /*
@@ -42,5 +43,9 @@ export class CpanelPage {
 
   logout() {
     this.navCtrl.setRoot(LoginPage);
+  }
+
+  openAlerts() {
+  	this.navCtrl.push(AlertsPage);
   }
 }

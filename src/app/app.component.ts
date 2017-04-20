@@ -9,6 +9,8 @@ import { ProductsPage } from '../pages/products-page/products-page'
 import { OrderPage } from '../pages/order-page/order-page'
 import { CpanelPage } from '../pages/cpanel/cpanel'
 import { QrdataPage } from '../pages/qrdata/qrdata'
+import { AlertsPage } from '../pages/alerts/alerts'
+import { AlertDetailsPage } from '../pages/alert-details/alert-details'
 import { Data } from '../providers/data';
 import { TPV } from '../providers/tpv';
 
